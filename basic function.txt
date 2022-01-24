@@ -1,0 +1,267 @@
+mysql> USE opentutorials;
+Database changed
+mysql> show DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| opentutorials      |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> SHOW TABLES;
++-------------------------+
+| Tables_in_opentutorials |
++-------------------------+
+| topic                   |
++-------------------------+
+1 row in set (0.02 sec)
+
+mysql> DESC topic;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(100) | NO   |     | NULL    |                |
+| description | text         | YES  |     | NULL    |                |
+| created     | datetime     | NO   |     | NULL    |                |
+| author      | varchar(30)  | YES  |     | NULL    |                |
+| profile     | varchar(100) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> INSERT INTO topic (title,description,created,author,profile) VALUES('MySQL','MySQL is ...',NOW(),'taeho','developr');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+-------+--------------+---------------------+--------+----------+
+| id | title | description  | created             | author | profile  |
++----+-------+--------------+---------------------+--------+----------+
+|  1 | MySQL | MySQL is ... | 2022-01-24 16:40:46 | taeho  | developr |
++----+-------+--------------+---------------------+--------+----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO topic (title,description,created,author,profile) VALUES('ORACLE','Oracle is ...',NOW(),'taeho','developr');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+--------+---------------+---------------------+--------+----------+
+| id | title  | description   | created             | author | profile  |
++----+--------+---------------+---------------------+--------+----------+
+|  1 | MySQL  | MySQL is ...  | 2022-01-24 16:40:46 | taeho  | developr |
+|  2 | ORACLE | Oracle is ... | 2022-01-24 16:48:14 | taeho  | developr |
++----+--------+---------------+---------------------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO topic (title,description,created,author,profile) VALUES('SQL Server','SQL Server is ...',NOW(),'chanho','database administrator');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+------------------------+
+| id | title      | description       | created             | author | profile                |
++----+------------+-------------------+---------------------+--------+------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developr               |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developr               |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator |
++----+------------+-------------------+---------------------+--------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO topic (title,description,created,author,profile) VALUES('PostgreSQL','PostgreSQL is ...',NOW(),'taeho','data scientist,developr');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+-------------------------+
+| id | title      | description       | created             | author | profile                 |
++----+------------+-------------------+---------------------+--------+-------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developr                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developr                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator  |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developr |
++----+------------+-------------------+---------------------+--------+-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO topic (title,description,created,author,profile) VALUES('MongoDB','MongoDB is ...',NOW(),'taeho','developer');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+-------------------------+
+| id | title      | description       | created             | author | profile                 |
++----+------------+-------------------+---------------------+--------+-------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developr                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developr                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator  |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developr |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer               |
++----+------------+-------------------+---------------------+--------+-------------------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE topic SET profile='developer' WHERE id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+-------------------------+
+| id | title      | description       | created             | author | profile                 |
++----+------------+-------------------+---------------------+--------+-------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer               |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developr                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator  |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developr |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer               |
++----+------------+-------------------+---------------------+--------+-------------------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE topic SET profile='developer' WHERE id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE topic SET profile='data scientist,developer' WHERE id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developer |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer                |
++----+------------+-------------------+---------------------+--------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developer |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer                |
++----+------------+-------------------+---------------------+--------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT id,title,created,author  FROM topic;
++----+------------+---------------------+--------+
+| id | title      | created             | author |
++----+------------+---------------------+--------+
+|  1 | MySQL      | 2022-01-24 16:40:46 | taeho  |
+|  2 | ORACLE     | 2022-01-24 16:48:14 | taeho  |
+|  3 | SQL Server | 2022-01-24 16:50:13 | chanho |
+|  4 | PostgreSQL | 2022-01-24 16:51:39 | taeho  |
+|  5 | MongoDB    | 2022-01-24 16:52:34 | taeho  |
++----+------------+---------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT "taeho";
++-------+
+| taeho |
++-------+
+| taeho |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT id,title,created,author FROM topic WHERE author="taeho";
++----+------------+---------------------+--------+
+| id | title      | created             | author |
++----+------------+---------------------+--------+
+|  1 | MySQL      | 2022-01-24 16:40:46 | taeho  |
+|  2 | ORACLE     | 2022-01-24 16:48:14 | taeho  |
+|  4 | PostgreSQL | 2022-01-24 16:51:39 | taeho  |
+|  5 | MongoDB    | 2022-01-24 16:52:34 | taeho  |
++----+------------+---------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,title,created,author FROM topic WHERE author="taeho" ORDER BY id DESC;
++----+------------+---------------------+--------+
+| id | title      | created             | author |
++----+------------+---------------------+--------+
+|  5 | MongoDB    | 2022-01-24 16:52:34 | taeho  |
+|  4 | PostgreSQL | 2022-01-24 16:51:39 | taeho  |
+|  2 | ORACLE     | 2022-01-24 16:48:14 | taeho  |
+|  1 | MySQL      | 2022-01-24 16:40:46 | taeho  |
++----+------------+---------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,title,created,author FROM topic WHERE author="taeho" ORDER BY id DESC LIMIT 2;
++----+------------+---------------------+--------+
+| id | title      | created             | author |
++----+------------+---------------------+--------+
+|  5 | MongoDB    | 2022-01-24 16:52:34 | taeho  |
+|  4 | PostgreSQL | 2022-01-24 16:51:39 | taeho  |
++----+------------+---------------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> DESC topic;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(100) | NO   |     | NULL    |                |
+| description | text         | YES  |     | NULL    |                |
+| created     | datetime     | NO   |     | NULL    |                |
+| author      | varchar(30)  | YES  |     | NULL    |                |
+| profile     | varchar(100) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | taeho  | data scientist,developer |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer                |
++----+------------+-------------------+---------------------+--------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE topic SET author='chanho' WHERE id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | chanho | data scientist,developer |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer                |
++----+------------+-------------------+---------------------+--------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | chanho | data scientist,developer |
+|  5 | MongoDB    | MongoDB is ...    | 2022-01-24 16:52:34 | taeho  | developer                |
++----+------------+-------------------+---------------------+--------+--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM topic WHERE id=5;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | chanho | data scientist,developer |
++----+------------+-------------------+---------------------+--------+--------------------------+
+4 rows in set (0.00 sec)
