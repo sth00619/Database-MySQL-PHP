@@ -1,0 +1,211 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW TABLES:
+    -> exit()
+    -> exit();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':
+exit()
+exit()' at line 1
+mysql> SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+mysql> USE opentutorials;
+Database changed
+mysql> SHOW TABELS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABELS' at line 1
+mysql> SHOW TABLES;
++-------------------------+
+| Tables_in_opentutorials |
++-------------------------+
+| topic                   |
++-------------------------+
+1 row in set (0.07 sec)
+
+mysql> RENAME TABLE topic TO topic_backup;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> SELECT * FROM topic_backup;
++----+------------+-------------------+---------------------+--------+--------------------------+
+| id | title      | description       | created             | author | profile                  |
++----+------------+-------------------+---------------------+--------+--------------------------+
+|  1 | MySQL      | MySQL is ...      | 2022-01-24 16:40:46 | taeho  | developer                |
+|  2 | ORACLE     | Oracle is ...     | 2022-01-24 16:48:14 | taeho  | developer                |
+|  3 | SQL Server | SQL Server is ... | 2022-01-24 16:50:13 | chanho | database administrator   |
+|  4 | PostgreSQL | PostgreSQL is ... | 2022-01-24 16:51:39 | hoho   | data scientist,developer |
++----+------------+-------------------+---------------------+--------+--------------------------+
+4 rows in set (0.01 sec)
+
+mysql> CREATE TABLE topic(
+    -> id INT(11) NOT NULL AUTO_INCREMENT,
+    -> title VARCHAR(30) NOT NULL,
+    -> description TEXT NULL,
+    -> created DATABASE NOT NULL,
+    -> author_id INT(11) NULL,
+    -> PRIMARY KEY(id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE NOT NULL,
+author_id INT(11) NULL,
+PRIMARY KEY(id)
+)' at line 5
+mysql> CREATE TABLE topic(
+    -> id INT(11) NOT NULL AUTO_INCREMENT,
+    -> title VARCHAR(30) NOT NULL,
+    -> description TEXT NULL,
+    -> created DATATIME NOT NULL,
+    -> author_id INT(11) NULL,
+    -> PRIMARY KEY(id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATATIME NOT NULL,
+author_id INT(11) NULL,
+PRIMARY KEY(id)
+)' at line 5
+mysql> CREATE TABLE topic(
+    -> id INT(11) NOT NULL AUTO_INCREMENT,
+    -> title VARCHAR(30) NOT NULL,
+    -> description TEXT NULL,
+    -> created DATETIME NOT NULL,
+    -> author_id INT(11) NULL,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected, 2 warnings (0.07 sec)
+
+mysql> DESC topic;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int         | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(30) | NO   |     | NULL    |                |
+| description | text        | YES  |     | NULL    |                |
+| created     | datetime    | NO   |     | NULL    |                |
+| author_id   | int         | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.05 sec)
+
+mysql> CREATE TABLE author(
+    -> id INT(11) NOT NULL AUTO_INCREMENT,
+    -> name VARCHAR(20) NOT NULL,
+    -> profile VARCHAR(200) NULL,
+    -> PRIMARY KEY(id)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> INSERT INTO author (id, name, profile) VALUES(1, 'egoing', 'developer');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM author;
++----+--------+-----------+
+| id | name   | profile   |
++----+--------+-----------+
+|  1 | egoing | developer |
++----+--------+-----------+
+1 row in set (0.00 sec)
+
+mysql> UPDATE author SET name='taeho' WHERE id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM author;
++----+-------+-----------+
+| id | name  | profile   |
++----+-------+-----------+
+|  1 | taeho | developer |
++----+-------+-----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO topic(id, title, description, created, author_id) VALUES(1, 'MySQL', 'MySQL is...', '2022-01-24 16:40:46', 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+-------+-------------+---------------------+-----------+
+| id | title | description | created             | author_id |
++----+-------+-------------+---------------------+-----------+
+|  1 | MySQL | MySQL is... | 2022-01-24 16:40:46 |         1 |
++----+-------+-------------+---------------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO topic(id, title, description, created, author_id) VALUES(2, 'ORACLE', 'Oracle is...', '2022-01-24 16:48:14', 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> UPDATE author SET name='chanho' WHERE id=2;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> UPDATE author SET name='hoho' WHERE id=3;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> INSERT INTO topic(id, title, description, created, author_id) VALUES(3, 'SQL Server', 'SQL Server is...', '2022-01-24 16:50:13', 2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO topic(id, title, description, created, author_id) VALUES(4, 'PostgreSQL', 'PostgreSQL is...', '2022-01-24 16:51:39', 3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+------------------+---------------------+-----------+
+| id | title      | description      | created             | author_id |
++----+------------+------------------+---------------------+-----------+
+|  1 | MySQL      | MySQL is...      | 2022-01-24 16:40:46 |         1 |
+|  2 | ORACLE     | Oracle is...     | 2022-01-24 16:48:14 |         1 |
+|  3 | SQL Server | SQL Server is... | 2022-01-24 16:50:13 |         2 |
+|  4 | PostgreSQL | PostgreSQL is... | 2022-01-24 16:51:39 |         3 |
++----+------------+------------------+---------------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM author;
++----+-------+-----------+
+| id | name  | profile   |
++----+-------+-----------+
+|  1 | taeho | developer |
++----+-------+-----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO author (id, name, profile) VALUES(2, 'chanho', 'database administrator');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO author (id, name, profile) VALUES(3, 'hoho', 'data scientist, developer');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM author;
++----+--------+---------------------------+
+| id | name   | profile                   |
++----+--------+---------------------------+
+|  1 | taeho  | developer                 |
+|  2 | chanho | database administrator    |
+|  3 | hoho   | data scientist, developer |
++----+--------+---------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+------------------+---------------------+-----------+
+| id | title      | description      | created             | author_id |
++----+------------+------------------+---------------------+-----------+
+|  1 | MySQL      | MySQL is...      | 2022-01-24 16:40:46 |         1 |
+|  2 | ORACLE     | Oracle is...     | 2022-01-24 16:48:14 |         1 |
+|  3 | SQL Server | SQL Server is... | 2022-01-24 16:50:13 |         2 |
+|  4 | PostgreSQL | PostgreSQL is... | 2022-01-24 16:51:39 |         3 |
++----+------------+------------------+---------------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO topic(id, title, description, created, author_id) VALUES(5, 'MongoDB', 'MongoDB is...', '2022-01-24 16:52:16', 1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM topic;
++----+------------+------------------+---------------------+-----------+
+| id | title      | description      | created             | author_id |
++----+------------+------------------+---------------------+-----------+
+|  1 | MySQL      | MySQL is...      | 2022-01-24 16:40:46 |         1 |
+|  2 | ORACLE     | Oracle is...     | 2022-01-24 16:48:14 |         1 |
+|  3 | SQL Server | SQL Server is... | 2022-01-24 16:50:13 |         2 |
+|  4 | PostgreSQL | PostgreSQL is... | 2022-01-24 16:51:39 |         3 |
+|  5 | MongoDB    | MongoDB is...    | 2022-01-24 16:52:16 |         1 |
++----+------------+------------------+---------------------+-----------+
+5 rows in set (0.00 sec)
